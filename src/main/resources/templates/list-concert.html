@@ -9,7 +9,35 @@
     <h1>Concert List</h1>
     <a href="/add-concert/">Add Concert</a>
     <!-- TODO: show delete link for each concert -->
+    <!-- Shown in the Action column below for each row -->
 
     <!-- TODO: Add list of concerts -->
+    <table border="1" cellpadding="6" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Performer</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Action</th> <!-- delete link per concert -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${#lists.isEmpty(concerts)}">
+                <td colspan="6">No concerts found.</td>
+            </tr>
+            <tr th:each="c : ${concerts}">
+                <td th:text="${c.id}">1</td>
+                <td th:text="${c.title}">Sample Title</td>
+                <td th:text="${c.performer}">Sample Performer</td>
+                <td th:text="${#dates.format(c.date, 'yyyy-MM-dd')}">2025-08-25</td>
+                <td th:text="${c.description}">Sample Description</td>
+                <td>
+                    <a th:href="@{'/delete-concert/' + ${c.id}}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
